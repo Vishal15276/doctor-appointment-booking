@@ -7,17 +7,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#3490dc', // Custom primary color
+        primary: '#5f6FFF', // Custom primary color
         secondary: '#ffed4a', // Additional custom colors if needed
         accent: '#38b2ac',
       },
-      fontFamily: {
-        sans: ['Roboto', 'sans-serif'], // Example of a custom font
-      },
-      spacing: {
-        '128': '32rem', // Custom spacing values
-        '144': '36rem',
-      },
+      gridTemplateColumns:{
+        'auto':'repeat(auto-fill,minmax(200px,1fr)'
+      }
     },
   },
   plugins: [

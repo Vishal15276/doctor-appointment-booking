@@ -12,7 +12,7 @@ module.exports = {
         accent: '#38b2ac',
       },
       gridTemplateColumns:{
-        'auto':'repeat(auto-fill,minmax(200px,1fr)'
+        'auto':'repeat(auto-fill,minmax(200px,1fr))'
       }
     },
   },

@@ -5,6 +5,7 @@ import { AppContext } from '../context/AppContext'
 const Doctors = () => {
   const { speciality } = useParams()
   const [filterDoc, setFilterDoc] = useState([])
+  const [showFilter, setShowFilter] = useState(false)
   const navigate = useNavigate()
 
   const { doctors } = useContext(AppContext)
@@ -25,20 +26,41 @@ const Doctors = () => {
     <div>
       <p className='text-gray-600'>Browse through the doctors specialist.</p>
       <div className='flex flex-col sm:flex-row items-start gap-5 mt-5'>
-        <div className='flex flex-col gap-4 text-sm text-gray-600'>
-          {['General physician', 'Gynecologist', 'Dermatologist', 'Pediatricians', 'Neurologist', 'Gastreonterologist'].map((spec) => (
-            <p
-              key={spec}
-              onClick={() => navigate(speciality === spec ? '/doctors' : `/doctors/${spec}`)}
-              className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${speciality === spec ? 'bg-indigo-100 text-black' : ''}`}
-            >
-              {spec}
-            </p>
-          ))}
-        </div>
+        {/* Filter Button */}
+        <button
+          className={`px-3 py-1 border rounded text-sm transition-all ${
+            showFilter ? 'bg-blue-500 text-white' : ''
+          }`}
+          onClick={() => setShowFilter((prev) => !prev)}
+        >
+          {showFilter ? " Filters" : "Filters"}
+        </button>
+
+        {/* Filters List (conditionally rendered) */}
+        {showFilter && (
+          <div className='flex flex-col gap-4 text-sm text-gray-600'>
+            {['General physician', 'Gynecologist', 'Dermatologist', 'Pediatricians', 'Neurologist', 'Gastreonterologist'].map((spec) => (
+              <p
+                key={spec}
+                onClick={() => navigate(speciality === spec ? '/doctors' : `/doctors/${spec}`)}
+                className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${
+                  speciality === spec ? 'bg-indigo-100 text-black' : ''
+                }`}
+              >
+                {spec}
+              </p>
+            ))}
+          </div>
+        )}
+
+        {/* Doctors List */}
         <div className='w-full grid grid-cols-auto gap-4 gap-y-6'>
           {filterDoc.map((item, index) => (
-            <div key={index} onClick={() => navigate(`/appointment/${item._id}`)}  className='border border-blue-200 rounded-xl overflow-hidden cursor-pointer hover:translate-y-[-10px] transition-all duration-500 w-full max-w-md'>
+            <div
+              key={index}
+              onClick={() => navigate(`/appointment/${item._id}`)}
+              className='border border-blue-200 rounded-xl overflow-hidden cursor-pointer hover:translate-y-[-10px] transition-all duration-500 w-full max-w-md'
+            >
               <img className='bg-blue-50' src={item.image} alt="" />
               <div className='p-4'>
                 <div className='flex items-center gap-2 text-sm text-center text-green-500'>

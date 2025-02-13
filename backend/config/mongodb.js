@@ -1,10 +1,22 @@
-import mongoose from 'mongoose'
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 
-const connectDB=async()=>{
+// Load environment variables
+dotenv.config();
 
-    mongoose.connection.on('connected',()=>console.log("Database Connected"))
+const connectDB = async () => {
+    try {
+        await mongoose.connect(process.env.MONGODB_URI, {
+            dbName: 'prescripto', // Set the correct database name
+            connectTimeoutMS: 10000, // 10s timeout
+            serverSelectionTimeoutMS: 10000, // Prevents long waiting times
+        });
 
-    await mongoose.connect(`${process.env.MONGODB_URI}/prescripto`)
-}
+        console.log("✅ Database Connected Successfully");
+    } catch (error) {
+        console.error("❌ MongoDB Connection Error:", error);
+        process.exit(1);
+    }
+};  
 
-export default connectDB
+export default connectDB;

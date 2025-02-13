@@ -10,8 +10,8 @@ const MyProfile = () => {
     phone:'9361413115',
     address:{
       line1:"245 Jansi Nagar 2nd street",
-      line2:"Veerappan chatiram",
-      line3:"Erode"
+      line2:"Veerappan chatiram"
+      
     },
     gender:"Male",
     dob:'2005-02-16'
